@@ -1,0 +1,32 @@
+{
+	"schemaVersion": 1,
+	"id": "custom-food-attributes",
+	"version": "${version}",
+	"name": "Custom Food Attributes",
+	"description": "This mod lets you configure the attributes of vanilla and modded food. You can change their nutrition, saturation, eating time and whether they should be always edible.",
+	"authors": [
+		"Fneifnox"
+	],
+	"contact": {
+		"homepage": "https://discord.gg/bszSDCq5ms",
+		"sources": "https://github.com/Fneifnox/custom-food-attributes",
+		"issues": "https://github.com/Fneifnox/custom-food-attributes/issues"
+	},
+	"license": "Fneifnox's License",
+	"icon": "assets/custom-food-attributes/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.fneifnox.customfoodattributes.CustomFoodAttributes"
+		]
+	},
+	"mixins": [
+		"custom-food-attributes.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
