@@ -42,16 +42,6 @@ public class AttributeUpdater {
             builder.alwaysEdible();
         }
 
-        if (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().isPresent()) {
-            builder.usingConvertsTo(Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().get().getItem());
-        }
-
-        if (!Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).effects().isEmpty()) {
-            for (FoodComponent.StatusEffectEntry statusEffectEntry : Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).effects()) {
-                builder.statusEffect(statusEffectEntry.effect(), statusEffectEntry.probability());
-            }
-        }
-
         foods.put(item, new FoodData(builder.build(), (float) (eatSeconds * CONFIG.eatSecondsMultiplierForAll())));
     }
 
@@ -66,17 +56,7 @@ public class AttributeUpdater {
                 builder.alwaysEdible();
             }
 
-            if (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().isPresent()) {
-                builder.usingConvertsTo(Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().get().getItem());
-            }
-
-            if (!Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).effects().isEmpty()) {
-                for (FoodComponent.StatusEffectEntry statusEffectEntry : Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).effects()) {
-                    builder.statusEffect(statusEffectEntry.effect(), statusEffectEntry.probability());
-                }
-            }
-
-            foods.put(item, new FoodData(builder.build(), (float) (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).eatSeconds() * CONFIG.eatSecondsMultiplierForAll())));
+            foods.put(item, new FoodData(builder.build(), (float) (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.CONSUMABLE)).consumeSeconds() * CONFIG.eatSecondsMultiplierForAll())));
         }
     }
 }
