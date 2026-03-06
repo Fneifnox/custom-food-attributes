@@ -1,6 +1,6 @@
 package net.fneifnox.customfoodattributes.init;
 
-import net.minecraft.item.Items;
+import net.minecraft.world.item.Items;
 
 import static net.fneifnox.customfoodattributes.AttributeUpdater.configureFoodAttributes;
 import static net.fneifnox.customfoodattributes.CustomFoodAttributes.CONFIG;

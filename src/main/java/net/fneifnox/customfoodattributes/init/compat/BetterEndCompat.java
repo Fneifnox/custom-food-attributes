@@ -1,8 +1,8 @@
 package net.fneifnox.customfoodattributes.init.compat;
 
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
 
 import static net.fneifnox.customfoodattributes.AttributeUpdater.configureFoodAttributes;
 import static net.fneifnox.customfoodattributes.CustomFoodAttributes.CONFIG;
@@ -10,20 +10,20 @@ import static net.fneifnox.customfoodattributes.CustomFoodAttributes.CONFIG;
 public class BetterEndCompat {
 
     public static void initBetterEndAttributes() {
-        Item blossomBerry = Registries.ITEM.get(Identifier.of("betterend", "blossom_berry"));
-        Item blossomBerryJelly = Registries.ITEM.get(Identifier.of("betterend", "blossom_berry_jelly"));
-        Item cavePumpkinPie = Registries.ITEM.get(Identifier.of("betterend", "cave_pumpkin_pie"));
-        Item cookedBoluxMushroom = Registries.ITEM.get(Identifier.of("betterend", "bolux_mushroom_cooked"));
-        Item cookedChorusMushroom = Registries.ITEM.get(Identifier.of("betterend", "chorus_mushroom_cooked"));
-        Item cookedEndFish = Registries.ITEM.get(Identifier.of("betterend", "end_fish_cooked"));
-        Item endFish = Registries.ITEM.get(Identifier.of("betterend", "end_fish_raw"));
-        Item rawAmberRoot = Registries.ITEM.get(Identifier.of("betterend", "amber_root_raw"));
-        Item rawChorusMushroom = Registries.ITEM.get(Identifier.of("betterend", "chorus_mushroom_raw"));
-        Item shadowBerry = Registries.ITEM.get(Identifier.of("betterend", "shadow_berry_raw"));
-        Item shadowBerryCooked = Registries.ITEM.get(Identifier.of("betterend", "shadow_berry_cooked"));
-        Item shadowBerryJelly = Registries.ITEM.get(Identifier.of("betterend", "shadow_berry_jelly"));
-        Item sweetBerryJelly = Registries.ITEM.get(Identifier.of("betterend", "sweet_berry_jelly"));
-        Item umbrellaClusterJuice = Registries.ITEM.get(Identifier.of("betterend", "umbrella_cluster_juice"));
+        Item blossomBerry = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "blossom_berry"));
+        Item blossomBerryJelly = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "blossom_berry_jelly"));
+        Item cavePumpkinPie = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "cave_pumpkin_pie"));
+        Item cookedBoluxMushroom = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "bolux_mushroom_cooked"));
+        Item cookedChorusMushroom = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "chorus_mushroom_cooked"));
+        Item cookedEndFish = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "end_fish_cooked"));
+        Item endFish = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "end_fish_raw"));
+        Item rawAmberRoot = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "amber_root_raw"));
+        Item rawChorusMushroom = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "chorus_mushroom_raw"));
+        Item shadowBerry = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "shadow_berry_raw"));
+        Item shadowBerryCooked = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "shadow_berry_cooked"));
+        Item shadowBerryJelly = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "shadow_berry_jelly"));
+        Item sweetBerryJelly = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "sweet_berry_jelly"));
+        Item umbrellaClusterJuice = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("betterend", "umbrella_cluster_juice"));
 
         configureFoodAttributes(blossomBerry, CONFIG.betterEnd.nutritionForBlossomBerry(), CONFIG.betterEnd.saturationForBlossomBerry(), CONFIG.betterEnd.eatSecondsForBlossomBerry(), CONFIG.betterEnd.alwaysEdibleForBlossomBerry());
         configureFoodAttributes(blossomBerryJelly, CONFIG.betterEnd.nutritionForBlossomBerryJelly(), CONFIG.betterEnd.saturationForBlossomBerryJelly(), CONFIG.betterEnd.eatSecondsForBlossomBerryJelly(), CONFIG.betterEnd.alwaysEdibleForBlossomBerryJelly());

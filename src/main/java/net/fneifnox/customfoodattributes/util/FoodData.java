@@ -1,6 +1,6 @@
 package net.fneifnox.customfoodattributes.util;
 
-import net.minecraft.component.type.FoodComponent;
+import net.minecraft.world.food.FoodProperties;
 
-public record FoodData(FoodComponent foodComponent, float eatSeconds) {
+public record FoodData(FoodProperties foodComponent, float eatSeconds) {
 }
