@@ -2,10 +2,10 @@ package net.fneifnox.customfoodattributes;
 
 import io.wispforest.owo.config.Option;
 import net.fneifnox.customfoodattributes.util.FoodData;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.FoodComponent;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -32,9 +32,9 @@ public class AttributeUpdater {
     }
 
     public static void configureFoodAttributes(Item item, int nutrition, float saturation, float eatSeconds, boolean alwaysEdible) {
-        if (item.getComponents().get(DataComponentTypes.FOOD) == null) return;
+        if (item.components().get(DataComponents.FOOD) == null) return;
 
-        FoodComponent.Builder builder = new FoodComponent.Builder()
+        FoodProperties.Builder builder = new FoodProperties.Builder()
                 .nutrition((int) Math.round(nutrition * CONFIG.nutritionMultiplierForAll()))
                 .saturationModifier((float) (saturation * CONFIG.saturationMultiplierForAll()));
 
@@ -46,17 +46,17 @@ public class AttributeUpdater {
     }
 
     public static void configureNonListedFoodAttributes() {
-        for (Item item : Registries.ITEM) {
-            if (item.getComponents().get(DataComponentTypes.FOOD) == null) continue;
-            FoodComponent.Builder builder = new FoodComponent.Builder()
-                    .nutrition((int) Math.round(Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).nutrition() * CONFIG.nutritionMultiplierForAll()))
-                    .saturationModifier((float) (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).saturation() * CONFIG.saturationMultiplierForAll()));
+        for (Item item : BuiltInRegistries.ITEM) {
+            if (item.components().get(DataComponents.FOOD) == null || item.components().get(DataComponents.CONSUMABLE) == null) continue;
+            FoodProperties.Builder builder = new FoodProperties.Builder()
+                    .nutrition((int) Math.round(Objects.requireNonNull(item.components().get(DataComponents.FOOD)).nutrition() * CONFIG.nutritionMultiplierForAll()))
+                    .saturationModifier((float) (Objects.requireNonNull(item.components().get(DataComponents.FOOD)).saturation() * CONFIG.saturationMultiplierForAll()));
 
-            if (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).canAlwaysEat()) {
+            if (Objects.requireNonNull(item.components().get(DataComponents.FOOD)).canAlwaysEat()) {
                 builder.alwaysEdible();
             }
 
-            foods.put(item, new FoodData(builder.build(), (float) (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.CONSUMABLE)).consumeSeconds() * CONFIG.eatSecondsMultiplierForAll())));
+            foods.put(item, new FoodData(builder.build(), (float) (Objects.requireNonNull(item.components().get(DataComponents.CONSUMABLE)).consumeSeconds() * CONFIG.eatSecondsMultiplierForAll())));
         }
     }
 }
