@@ -42,10 +42,6 @@ public class AttributeUpdater {
             builder.alwaysEdible();
         }
 
-        if (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().isPresent()) {
-            builder.usingConvertsTo(Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().get().getItem());
-        }
-
         if (!Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).effects().isEmpty()) {
             for (FoodComponent.StatusEffectEntry statusEffectEntry : Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).effects()) {
                 builder.statusEffect(statusEffectEntry.effect(), statusEffectEntry.probability());
@@ -64,10 +60,6 @@ public class AttributeUpdater {
 
             if (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).canAlwaysEat()) {
                 builder.alwaysEdible();
-            }
-
-            if (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().isPresent()) {
-                builder.usingConvertsTo(Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().get().getItem());
             }
 
             if (!Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).effects().isEmpty()) {

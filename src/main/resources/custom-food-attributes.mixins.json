@@ -3,6 +3,7 @@
   "package": "net.fneifnox.customfoodattributes.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "HungerManagerMixin",
     "ItemMixin",
     "LivingEntityMixin"
   ],
