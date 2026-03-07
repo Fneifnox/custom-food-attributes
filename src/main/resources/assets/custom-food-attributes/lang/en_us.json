@@ -168,12 +168,6 @@
   "text.config.custom-food-attributes.option.eatSecondsForMutton": "Eat seconds",
   "text.config.custom-food-attributes.option.alwaysEdibleForMutton": "Always edible",
 
-  "text.config.custom-food-attributes.section.Ominous Bottle": "Ominous Bottle",
-  "text.config.custom-food-attributes.option.nutritionForOminousBottle": "Nutrition",
-  "text.config.custom-food-attributes.option.saturationForOminousBottle": "Saturation",
-  "text.config.custom-food-attributes.option.eatSecondsForOminousBottle": "Eat seconds",
-  "text.config.custom-food-attributes.option.alwaysEdibleForOminousBottle": "Always edible",
-
   "text.config.custom-food-attributes.section.Poisonous Potato": "Poisonous Potato",
   "text.config.custom-food-attributes.option.nutritionForPoisonousPotato": "Nutrition",
   "text.config.custom-food-attributes.option.saturationForPoisonousPotato": "Saturation",

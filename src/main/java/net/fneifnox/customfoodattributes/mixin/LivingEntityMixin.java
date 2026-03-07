@@ -12,7 +12,7 @@ import static net.fneifnox.customfoodattributes.AttributeUpdater.foods;
 public class LivingEntityMixin {
 
     // EatSeconds
-    @ModifyExpressionValue(method = "setCurrentHand", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxUseTime(Lnet/minecraft/entity/LivingEntity;)I"))
+    @ModifyExpressionValue(method = "setCurrentHand", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxUseTime()I"))
     private int changeEatingSpeed(int original, Hand hand) {
         LivingEntity entity = (LivingEntity)(Object)this;
         if (foods.get(entity.getStackInHand(hand).getItem()) == null) return original;

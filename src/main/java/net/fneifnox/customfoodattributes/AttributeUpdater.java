@@ -1,15 +1,15 @@
 package net.fneifnox.customfoodattributes;
 
+import com.mojang.datafixers.util.Pair;
 import io.wispforest.owo.config.Option;
 import net.fneifnox.customfoodattributes.util.FoodData;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.FoodComponent;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.Objects;
 
 import static net.fneifnox.customfoodattributes.CustomFoodAttributes.CONFIG;
 
@@ -32,23 +32,23 @@ public class AttributeUpdater {
     }
 
     public static void configureFoodAttributes(Item item, int nutrition, float saturation, float eatSeconds, boolean alwaysEdible) {
-        if (item.getComponents().get(DataComponentTypes.FOOD) == null) return;
+        if (item.getFoodComponent() == null) return;
 
         FoodComponent.Builder builder = new FoodComponent.Builder()
-                .nutrition((int) Math.round(nutrition * CONFIG.nutritionMultiplierForAll()))
+                .hunger((int) Math.round(nutrition * CONFIG.nutritionMultiplierForAll()))
                 .saturationModifier((float) (saturation * CONFIG.saturationMultiplierForAll()));
 
         if (alwaysEdible) {
             builder.alwaysEdible();
         }
 
-        if (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().isPresent()) {
-            builder.usingConvertsTo(Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().get().getItem());
+        if (item.getFoodComponent().isMeat()) {
+            builder.meat();
         }
 
-        if (!Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).effects().isEmpty()) {
-            for (FoodComponent.StatusEffectEntry statusEffectEntry : Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).effects()) {
-                builder.statusEffect(statusEffectEntry.effect(), statusEffectEntry.probability());
+        if (!item.getFoodComponent().getStatusEffects().isEmpty()) {
+            for (Pair<StatusEffectInstance, Float> statusEffectEntry : item.getFoodComponent().getStatusEffects()) {
+                builder.statusEffect(statusEffectEntry.getFirst(), statusEffectEntry.getSecond());
             }
         }
 
@@ -57,26 +57,26 @@ public class AttributeUpdater {
 
     public static void configureNonListedFoodAttributes() {
         for (Item item : Registries.ITEM) {
-            if (item.getComponents().get(DataComponentTypes.FOOD) == null) continue;
+            if (item.getFoodComponent() == null) continue;
             FoodComponent.Builder builder = new FoodComponent.Builder()
-                    .nutrition((int) Math.round(Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).nutrition() * CONFIG.nutritionMultiplierForAll()))
-                    .saturationModifier((float) (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).saturation() * CONFIG.saturationMultiplierForAll()));
+                    .hunger((int) Math.round(item.getFoodComponent().getHunger() * CONFIG.nutritionMultiplierForAll()))
+                    .saturationModifier((item.getFoodComponent().getSaturationModifier() * (float) CONFIG.saturationMultiplierForAll()));
 
-            if (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).canAlwaysEat()) {
+            if (item.getFoodComponent().isAlwaysEdible()) {
                 builder.alwaysEdible();
             }
 
-            if (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().isPresent()) {
-                builder.usingConvertsTo(Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).usingConvertsTo().get().getItem());
+            if (item.getFoodComponent().isMeat()) {
+                builder.meat();
             }
 
-            if (!Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).effects().isEmpty()) {
-                for (FoodComponent.StatusEffectEntry statusEffectEntry : Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).effects()) {
-                    builder.statusEffect(statusEffectEntry.effect(), statusEffectEntry.probability());
+            if (!item.getFoodComponent().getStatusEffects().isEmpty()) {
+                for (Pair<StatusEffectInstance, Float> statusEffectEntry : item.getFoodComponent().getStatusEffects()) {
+                    builder.statusEffect(statusEffectEntry.getFirst(), statusEffectEntry.getSecond());
                 }
             }
 
-            foods.put(item, new FoodData(builder.build(), (float) (Objects.requireNonNull(item.getComponents().get(DataComponentTypes.FOOD)).eatSeconds() * CONFIG.eatSecondsMultiplierForAll())));
+            foods.put(item, new FoodData(builder.build(), (item.getMaxUseTime(item.getDefaultStack()) * (float) CONFIG.eatSecondsMultiplierForAll())));
         }
     }
 }
