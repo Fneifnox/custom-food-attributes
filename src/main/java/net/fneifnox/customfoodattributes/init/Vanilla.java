@@ -35,7 +35,6 @@ public class Vanilla {
         configureFoodAttributes(Items.MELON_SLICE, CONFIG.nutritionForMelonSlice(), CONFIG.saturationForMelonSlice(), CONFIG.eatSecondsForMelonSlice(), CONFIG.alwaysEdibleForMelonSlice());
         configureFoodAttributes(Items.MUSHROOM_STEW, CONFIG.nutritionForMushroomStew(), CONFIG.saturationForMushroomStew(), CONFIG.eatSecondsForMushroomStew(), CONFIG.alwaysEdibleForMushroomStew());
         configureFoodAttributes(Items.MUTTON, CONFIG.nutritionForMutton(), CONFIG.saturationForMutton(), CONFIG.eatSecondsForMutton(), CONFIG.alwaysEdibleForMutton());
-        configureFoodAttributes(Items.OMINOUS_BOTTLE, CONFIG.nutritionForOminousBottle(), CONFIG.saturationForOminousBottle(), CONFIG.eatSecondsForOminousBottle(), CONFIG.alwaysEdibleForOminousBottle());
         configureFoodAttributes(Items.POISONOUS_POTATO, CONFIG.nutritionForPoisonousPotato(), CONFIG.saturationForPoisonousPotato(), CONFIG.eatSecondsForPoisonousPotato(), CONFIG.alwaysEdibleForPoisonousPotato());
         configureFoodAttributes(Items.PORKCHOP, CONFIG.nutritionForPorkchop(), CONFIG.saturationForPorkchop(), CONFIG.eatSecondsForPorkchop(), CONFIG.alwaysEdibleForPorkchop());
         configureFoodAttributes(Items.POTATO, CONFIG.nutritionForPotato(), CONFIG.saturationForPotato(), CONFIG.eatSecondsForPotato(), CONFIG.alwaysEdibleForPotato());
