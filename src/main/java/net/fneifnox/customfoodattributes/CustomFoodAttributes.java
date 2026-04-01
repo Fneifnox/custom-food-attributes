@@ -2,6 +2,7 @@ package net.fneifnox.customfoodattributes;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fneifnox.customfoodattributes.config.CustomFA;
@@ -29,21 +30,24 @@ public class CustomFoodAttributes implements ModInitializer {
 		CONFIG.load();
 		CONFIG.save();
 
-		configureNonListedFoodAttributes();
+		// Components aren't bound till a world got loaded
+		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+			configureNonListedFoodAttributes();
 
-		initVanillaAttributes();
+			initVanillaAttributes();
 
-		if (FabricLoader.getInstance().isModLoaded("appleskin")) {
-			modifyAppleSkinValues();
-		}
+			if (FabricLoader.getInstance().isModLoaded("appleskin")) {
+				modifyAppleSkinValues();
+			}
 
-		if (FabricLoader.getInstance().isModLoaded("betterend")) {
-			initBetterEndAttributes();
-		}
+			if (FabricLoader.getInstance().isModLoaded("betterend")) {
+				initBetterEndAttributes();
+			}
 
-		if (FabricLoader.getInstance().isModLoaded("betternether")) {
-			initBetterNetherAttributes();
-		}
+			if (FabricLoader.getInstance().isModLoaded("betternether")) {
+				initBetterNetherAttributes();
+			}
+		});
 
 		ServerTickEvents.START_SERVER_TICK.register(server -> {
 
